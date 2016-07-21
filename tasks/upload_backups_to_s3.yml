@@ -1,0 +1,11 @@
+- name: Install easy_install
+  yum: name=python-setuptools state=present
+
+- name: Install python packages needed for S3 upload
+  easy_install: name={{item}} state=present
+  with_items:
+  - pip
+  - boto
+
+- name: Copy upload backup file to S3 script to gitlab instance
+  template: src=upload_backup_to_s3.py.j2 dest=/root/upload_backup_to_s3.py mode=0700

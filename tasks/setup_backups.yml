@@ -1,17 +1,9 @@
-- name: Install easy_install
-  yum: name=python-setuptools state=present
-
-- name: Install python packages needed for S3 upload
-  easy_install: name={{item}} state=present
-  with_items:
-  - pip
-  - boto
-
-- name: Copy upload backup file to S3 script to gitlab instance
-  copy: src=backup.sh dest=/root/ mode=0700
-
-- name: Copy upload backup file to S3 script to gitlab instance
-  template: src=upload_backup_to_s3.py.j2 dest=/root/upload_backup_to_s3.py mode=0700
+- name: Copy take backup script to gitlab instance
+  template: src=backup.sh.j2 dest=/root/backup.sh mode=0700
 
 - name: Set cron for backups
   cron: name=Backup job="/root/backup.sh {{backup_directory}} /root" day="{{backup_cron.day}}" hour="{{backup_cron.hour}}" minute="{{backup_cron.minute}}" month="{{backup_cron.month}}" weekday="{{backup_cron.weekday}}" state="{{backup_cron_state}}"
+
+- name: Setup S3 backups is s3_bucket is defined
+  include: upload_backups_to_s3.yml
+  when: s3_bucket is defined

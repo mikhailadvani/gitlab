@@ -4,5 +4,5 @@
 - name: Download and install gitlab
   include: install_gitlab.yml
 
-- name: Backup gitlab DB and upload to S3
+- name: Backup gitlab
   include: setup_backups.yml
