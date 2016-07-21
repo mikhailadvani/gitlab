@@ -1,0 +1,17 @@
+- name: Install pre-requisite packages
+  yum: state=present name={{ item }}
+  with_items:
+    - curl
+    - policycoreutils
+    - postfix
+
+- name: Fetch repo setup script
+  get_url: url="{{repo_setup_script}}" dest=/tmp/script.rpm.sh mode=0755
+
+- name: Set yum repo
+  command: bash /tmp/script.rpm.sh
+
+- name: Install
+  yum: state=present name="gitlab-ce-{{version}}"
+  notify:
+  - reconfigure

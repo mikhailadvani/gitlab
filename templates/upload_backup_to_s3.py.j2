@@ -1,0 +1,13 @@
+import sys
+import datetime
+import boto
+from boto.s3.key import Key
+
+file_to_backup = sys.argv[1]
+conn = boto.connect_s3("{{AWS_ACCESS_KEY_ID}}", "{{AWS_SECRET_ACCESS_KEY}}")
+bucket = conn.get_bucket("{{s3_bucket}}")
+
+k = Key(bucket)
+k.key = "backup/" + datetime.datetime.now().isoformat() + ".tar"
+k.set_contents_from_filename(file_to_backup)
+

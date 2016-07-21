@@ -1,0 +1,5 @@
+---
+# handlers file for gitlab
+
+- name: reconfigure
+  command: gitlab-ctl reconfigure

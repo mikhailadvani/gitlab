@@ -1,0 +1,11 @@
+---
+# defaults file for gitlab
+repo_setup_script: https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh
+version: 8.7.4-ce.0.el7
+backup_cron:
+  day: "*"
+  hour: "18"
+  minute: "00"
+  month: "*"
+  weekday: "*"
+backup_cron_state: present

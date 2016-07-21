@@ -1,0 +1,8 @@
+---
+# tasks file for gitlab
+
+- name: Download and install gitlab
+  include: install_gitlab.yml
+
+- name: Backup gitlab DB and upload to S3
+  include: setup_backups.yml

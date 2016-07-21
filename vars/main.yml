@@ -1,0 +1,3 @@
+---
+# vars file for gitlab
+backup_directory: /var/opt/gitlab/backups

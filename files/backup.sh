@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+BACKUP_DIRECTORY=$1
+UPLOAD_SCRIPT_PATH=$2
+gitlab-rake gitlab:backup:create
+FILE_TO_BACKUP="$(ls $BACKUP_DIRECTORY/*_gitlab_backup.tar)"
+python "$UPLOAD_SCRIPT_PATH"/upload_backup_to_s3.py "$FILE_TO_BACKUP"
+rm -f "$BACKUP_DIRECTORY"/*_gitlab_backup.tar
