@@ -13,11 +13,11 @@ galaxy_info:
     - 6
     - 7
 
-  dependencies: []
-
   galaxy_tags:
   - git
   - gitlab
   - s3
   - development
   - vcs
+
+dependencies: []
