@@ -2,6 +2,7 @@
 # defaults file for gitlab
 repo_setup_script: https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh
 version: 8.7.4-ce.0.el7
+hostname: http://gitlab.example.com
 backup_cron:
   day: "*"
   hour: "18"

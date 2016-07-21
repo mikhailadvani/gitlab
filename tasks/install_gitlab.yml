@@ -15,3 +15,8 @@
   yum: state=present name="gitlab-ce-{{version}}"
   notify:
   - reconfigure
+
+- name: Set gitlab hostname
+  lineinfile: dest=/etc/gitlab/gitlab.rb regexp='^external_url' line='external_url \'{{hostname}}\''
+  notify:
+  - reconfigure
