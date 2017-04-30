@@ -1,13 +1,30 @@
-- name: INstall pre-requisites
+- name: Install pre-requisites
   yum: name="{{item}}" state=present
   with_items:
     - gcc
-    - libffi
 
 - name: Get certbot-auto
   get_url: url=https://dl.eff.org/certbot-auto dest=/opt/certbot-auto mode=a+x
 
 - name: Get cert
-  command: "./certbot-auto certonly --standalone -d hostname -d www.{{hostname}} --noninteractive --agree-tos --register-unsafely-without-email"
+  shell: "echo y | ./certbot-auto certonly --standalone -d {{hostname}} -d www.{{hostname}} --noninteractive --agree-tos --register-unsafely-without-email --debug"
   args:
     chdir: /opt
+
+- name: Make certs directory
+  file: path=/etc/gitlab/ssl state=directory owner=root mode=0755
+
+- name: Copy certificate to nginx's certificate location
+  file: src="/etc/letsencrypt/live/{{hostname}}/fullchain.pem" dest=/etc/gitlab/ssl/{{hostname}}.crt state=link
+  notify: reconfigure
+
+- name: Copy certificate to nginx's certificate location
+  file: src=/etc/letsencrypt/live/{{hostname}}/privkey.pem dest=/etc/gitlab/ssl/{{hostname}}.key state=link
+  notify: reconfigure
+
+- name: Renew certificate
+  shell: ./certbot-auto renew
+  args:
+    chdir: /opt
+  when: renew_cert is defined and renew_cert == 'yes'
+  notify: reconfigure
