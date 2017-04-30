@@ -5,11 +5,31 @@
     - policycoreutils
     - postfix
 
-- name: Fetch repo setup script
-  get_url: url="{{repo_setup_script}}" dest=/tmp/script.rpm.sh mode=0755
+- name: Set gitlab-ce repository
+  yum_repository:
+    baseurl: https://packages.gitlab.com/gitlab/gitlab-ce/el/6/$basearch
+    enabled: yes
+    file: gitlab_gitlab-ce
+    gpgcheck: no
+    gpgkey: https://packages.gitlab.com/gitlab/gitlab-ce/gpgkey
+    metadata_expire: 300
+    name: gitlab_gitlab-ce
+    repo_gpgcheck: yes
+    sslverify: yes
+    sslcacert: /etc/pki/tls/certs/ca-bundle.crt
 
-- name: Set yum repo
-  command: bash /tmp/script.rpm.sh
+- name: Set gitlab-source repository
+  yum_repository:
+    baseurl: https://packages.gitlab.com/gitlab/gitlab-ce/el/6/SRPMS
+    enabled: yes
+    file: gitlab_gitlab-ce
+    gpgcheck: no
+    gpgkey: https://packages.gitlab.com/gitlab/gitlab-ce/gpgkey
+    metadata_expire: 300
+    name: gitlab_gitlab-ce-source
+    repo_gpgcheck: yes
+    sslverify: yes
+    sslcacert: /etc/pki/tls/certs/ca-bundle.crt
 
 - name: Install
   yum: state=present name="gitlab-ce-{{version}}"

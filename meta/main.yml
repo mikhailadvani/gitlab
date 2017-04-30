@@ -1,7 +1,6 @@
 galaxy_info:
   author: mikhailadvani
-  description: setup
-  company: ThoughtWorks Technologies
+  description: setup gitlab
 
   license: license (MIT)
   
@@ -11,7 +10,6 @@ galaxy_info:
   - name: EL
     versions:
     - 6
-    - 7
 
   galaxy_tags:
   - git
