@@ -1,6 +1,8 @@
 gitlab
 =========
 
+[![Build Status](https://travis-ci.org/mikhailadvani/gitlab.svg?branch=master)](https://travis-ci.org/mikhailadvani/gitlab) [![Galaxy](https://img.shields.io/badge/ansible--galaxy-mikhailadvani.gitlab-blue.svg)](https://galaxy.ansible.com/mikhailadvani/gitlab)
+
 Remote setup of gitlab server with and optional S3 bucket driven backups
 
 Role Variables

@@ -3,3 +3,6 @@
 
 - name: reconfigure
   command: gitlab-ctl reconfigure
+
+- name: restart
+  command: gitlab-ctl restart
