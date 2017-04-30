@@ -2,7 +2,7 @@
 # handlers file for gitlab
 
 - name: reconfigure
-  command: gitlab-ctl reconfigure
+  script: reconfigure.sh
 
 - name: restart
   command: gitlab-ctl restart
