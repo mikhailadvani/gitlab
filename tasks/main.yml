@@ -4,5 +4,9 @@
 - name: Download and install gitlab
   include: install_gitlab.yml
 
+- name: Setup letsencrypt SSL
+  include: setup_ssl.yml
+  when: web_protocol == 'https'
+
 - name: Backup gitlab
   include: setup_backups.yml

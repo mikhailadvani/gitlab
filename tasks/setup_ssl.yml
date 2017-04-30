@@ -1,0 +1,13 @@
+- name: INstall pre-requisites
+  yum: name="{{item}}" state=present
+  with_items:
+    - gcc
+    - libffi
+
+- name: Get certbot-auto
+  get_url: url=https://dl.eff.org/certbot-auto dest=/opt/certbot-auto mode=a+x
+
+- name: Get cert
+  command: "./certbot-auto certonly --standalone -d hostname -d www.{{hostname}} --noninteractive --agree-tos --register-unsafely-without-email"
+  args:
+    chdir: /opt

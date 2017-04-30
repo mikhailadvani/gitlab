@@ -39,6 +39,6 @@
   - reconfigure
 
 - name: Set gitlab hostname
-  lineinfile: dest=/etc/gitlab/gitlab.rb regexp='^external_url' line='external_url \'{{hostname}}\''
+  lineinfile: dest=/etc/gitlab/gitlab.rb regexp='^external_url' line='external_url \'{{web_protocol}}://{{hostname}}\''
   notify:
   - reconfigure

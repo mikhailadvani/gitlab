@@ -1,7 +1,8 @@
 ---
 # defaults file for gitlab
 version: 9.1.1-ce.0.el6
-hostname: http://gitlab.example.com
+web_protocol: http
+hostname: gitlab.example.com
 backup_cron:
   day: "*"
   hour: "18"
